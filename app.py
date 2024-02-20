@@ -13,13 +13,21 @@ def ping():
     return jsonify({'response': 'pong'})
 
 
-@app.route('/twit', method=['POST'])
+@app.route('/twit', methods=['POST'])
 def create_twit():
     # Приходит запрос {'body': 'Hello World', 'author': '@aqaguy'}
     twit_json = request.get_json()
     twit = Twit(twit_json['body'], twit_json['author'])
     twits.append(twit)
     return jsonify({'status': 'success'})
+
+
+@app.route('/twit', methods=['GET'])
+def read_twits():
+    serialised_twits = []
+    for twit in twits:
+        serialised_twits.append(twit.to_dict())
+    return jsonify({"twits": serialised_twits})
 
 
 if __name__ == "__main__":
