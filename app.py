@@ -29,6 +29,7 @@ def read_the_twit(twit_id):
     for i in range(len(twits)):
         if twit_id == twits[i].id:
             return jsonify(twits[i].to_dict())
+    return jsonify({'status': 'twit not found'})
 
 
 @app.route('/twit', methods=['PUT'])
@@ -37,8 +38,8 @@ def update_twit():
     for i in range(len(twits)):
         if twit_json['id'] == twits[i].id:
             twits[i].body = twit_json['body']
-            break
-    return jsonify({'status': 'success'})
+            return jsonify({'status': 'success'})
+    return jsonify({'status': 'twit not found'})
 
 
 @app.route('/twit', methods=['DELETE'])
@@ -47,8 +48,8 @@ def delete_twit():
     for i in range(len(twits)):
         if twit_json['id'] == twits[i].id:
             del twits[i]
-            break
-    return jsonify({'status': 'success'})
+            return jsonify({'status': 'success'})
+    return jsonify({'status': 'twit not found'})
 
 
 if __name__ == "__main__":
