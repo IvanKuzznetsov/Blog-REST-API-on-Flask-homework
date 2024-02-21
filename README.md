@@ -1,4 +1,4 @@
-# Project
+# REST API on Flask (homework)
 REST API предоставляющее возможность ведения микроблога (Twitter)
 
 Запуск приложения

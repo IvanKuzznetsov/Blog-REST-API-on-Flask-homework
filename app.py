@@ -9,7 +9,7 @@ twits = []
 
 @app.route('/twit', methods=['POST'])
 def create_twit():
-    # Приходит запрос {'body': 'Hello World', 'author': '@aqaguy', 'id': 1}
+    # Приходит запрос  формата {'body': 'Hello World', 'author': '@aqaguy', 'id': 1}
     twit_json = request.get_json()
     twit = Twit(twit_json['body'], twit_json['author'], twit_json['id'])
     twits.append(twit)
@@ -20,7 +20,7 @@ def create_twit():
 def read_twits():
     serialised_twits = []
     for twit in twits:
-        serialised_twits.append(twit.to_dict())
+        serialised_twits.append(twit.to_dict())  # Сериализуем объекты класса для возможности преобразования в JSON
     return jsonify({"twits": serialised_twits})
 
 
@@ -28,7 +28,7 @@ def read_twits():
 def read_the_twit(twit_id):
     for i in range(len(twits)):
         if twit_id == twits[i].id:
-            return jsonify(twits[i].to_dict())
+            return jsonify(twits[i].to_dict())  # Сериализуем твит для возможности преобразования в JSON
     return jsonify({'status': 'twit not found'})
 
 
